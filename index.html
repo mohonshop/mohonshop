@@ -405,9 +405,52 @@ body.adm{padding-bottom:0}
 .mg-mb{display:grid;grid-template-columns:1fr 1fr;gap:10px}.mg-mb button{padding:13px 6px;border-radius:12px;font-weight:800;font-size:15px}
 @keyframes mgf{from{opacity:0}to{opacity:1}}@keyframes mgp{from{opacity:0;transform:translateY(12px) scale(.96)}to{opacity:1;transform:none}}
 .sqlb{background:#0b1a40;color:#e6edff;border-radius:10px;padding:10px;font-size:11.5px;overflow-x:auto;white-space:pre;margin:0 0 10px}
+
+/* ===== three-dot menu, profile icon, help page ===== */
+header{padding:7px 12px 7px 8px}
+.hx-logo{flex-shrink:0;display:flex}
+.hx-mb,.hx-pf{flex:0 0 auto;width:40px;height:40px;padding:0;display:grid;place-items:center;color:#fff;cursor:pointer;-webkit-tap-highlight-color:transparent}
+.hx-mb svg,.hx-pf svg{width:21px;height:21px}
+.hx-mb{border-radius:12px;background:rgba(255,255,255,.08);border:1px solid rgba(255,255,255,.24);box-shadow:none}
+.hx-mb[aria-expanded=true]{background:rgba(212,162,76,.26);border-color:#d4a24c}
+.hx-pf{border-radius:50%;background:linear-gradient(145deg,rgba(255,255,255,.18),rgba(255,255,255,.04));border:1.5px solid #d4a24c;box-shadow:0 2px 10px rgba(0,0,0,.28),inset 0 1px 0 rgba(255,255,255,.28)}
+.hx-ov{position:fixed;inset:0;z-index:70;background:rgba(8,22,51,.4);-webkit-backdrop-filter:blur(2px);backdrop-filter:blur(2px);opacity:0;visibility:hidden;transition:opacity .2s ease,visibility 0s linear .2s}
+.hx-ov.on{opacity:1;visibility:visible;transition:opacity .2s ease}
+.hx-dd{position:fixed;z-index:71;width:min(290px,calc(100vw - 16px));box-sizing:border-box;padding:8px;background:#fff;border:1px solid #e6eaf3;border-radius:18px;box-shadow:0 24px 60px rgba(8,22,51,.34),0 4px 14px rgba(8,22,51,.14);transform-origin:top left;opacity:0;visibility:hidden;transform:translateY(-8px) scale(.94);transition:opacity .16s ease,transform .2s cubic-bezier(.22,.8,.3,1),visibility 0s linear .2s}
+.hx-dd.on{opacity:1;visibility:visible;transform:none;transition:opacity .16s ease,transform .24s cubic-bezier(.22,.8,.3,1)}
+.hx-it{display:flex;align-items:center;gap:12px;width:100%;box-sizing:border-box;padding:9px 10px;border:0;border-radius:12px;background:transparent;color:#1a2238;box-shadow:none;font-family:inherit;font-size:15px;font-weight:600;line-height:1.25;text-align:left;cursor:pointer}
+.hx-it:hover,.hx-it:focus-visible{background:#f1f4fb;outline:0}
+.hx-it:focus-visible{box-shadow:inset 0 0 0 2px #d4a24c}
+.hx-it:active{transform:none}
+.hx-ic{flex:0 0 36px;height:36px;border-radius:11px;display:grid;place-items:center;background:#eef2fb;color:#0f2557}
+.hx-ic svg{width:19px;height:19px}
+.hx-it.pri,.hx-it.pri:hover{background:#fbf3df}
+.hx-it.pri .hx-ic{background:linear-gradient(135deg,#f6d38a,#d4a24c);color:#1b1303}
+.hx-bd{margin-left:auto;min-width:22px;height:22px;padding:0 7px;box-sizing:border-box;border-radius:11px;background:#f59e0b;color:#1b1303;font-size:12px;font-weight:800;display:grid;place-items:center}
+.hx-pill{margin-left:auto;padding:5px 12px;border-radius:999px;background:#eef2fb;color:#0f2557;font-size:12.5px;font-weight:700}
+.hx-sp{height:1px;margin:6px 10px;background:#e6eaf3}
+body.adm .hx-ov,body.adm .hx-dd{display:none!important}
+.hlp{max-width:560px;margin:0 auto}
+.hlp-hd{margin:8px 2px 16px}
+.hlp-hd h2{font-size:22px;color:var(--b);margin:8px 0 6px}
+.hlp-hd p{color:var(--mut);font-size:14.5px;line-height:1.65;margin:0}
+.hlp-c{display:flex;align-items:center;gap:14px;background:#fff;border:1px solid var(--line);border-radius:18px;padding:14px 16px;margin-bottom:12px;box-shadow:var(--sh);color:var(--tx)}
+.hlp-c:active{background:#f7f9fd}
+.hlp-i{flex:0 0 48px;height:48px;border-radius:14px;display:grid;place-items:center}
+.hlp-i svg{width:24px;height:24px}
+.hlp-t{min-width:0;flex:1}
+.hlp-t b{display:block;font-size:15.5px}
+.hlp-t span{display:block;margin-top:2px;font-size:14px;color:var(--mut);overflow-wrap:anywhere}
+.hlp-go{flex:0 0 auto;color:#9aa5c0}
+.hlp-go svg{width:20px;height:20px}
+.wa .hlp-i{background:#e7f8ee;color:#128c4a}
+.ph .hlp-i{background:#e9eefb;color:#0f2557}
+.ml .hlp-i{background:#fbf2dc;color:#a8741f}
+@media (prefers-reduced-motion:reduce){.hx-ov,.hx-dd{transition:none!important}}
 </style></head><body>
-<header><a href="#/"><img src="logo.png" alt="" onerror="this.style.display='none'"></a><b id="sn" onclick="goHome()">MoHoN Shop</b><button type="button" class="lg" id="lb" onclick="setL()"></button><a href="#/profile" class="su" id="su" onclick="return gate(event,'/profile')"></a></header>
-<nav class="bn"><a href="#/" id="hb" onclick="goHome();return false"></a><a href="#/orders" id="ob" onclick="return gate(event,'/orders')"></a><a href="#/cart" id="cb" onclick="return gate(event,'/cart')"></a></nav>
+<header><button type="button" class="hx-mb" id="mnb" aria-haspopup="menu" aria-expanded="false" aria-controls="hxd" onclick="hxToggle(event)"><svg viewBox="0 0 24 24" aria-hidden="true"><circle cx="12" cy="5" r="1.8" fill="currentColor"/><circle cx="12" cy="12" r="1.8" fill="currentColor"/><circle cx="12" cy="19" r="1.8" fill="currentColor"/></svg></button><a href="#/" class="hx-logo"><img src="logo.png" alt="" onerror="this.style.display='none'"></a><b id="sn" onclick="goHome()">MoHoN Shop</b><a href="#/profile" class="hx-pf" id="su" onclick="return gate(event,'/profile')"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"/><circle cx="12" cy="7" r="4"/></svg></a></header>
+<div class="hx-ov" id="hxo" onclick="hxClose()"></div><div class="hx-dd" id="hxd" role="menu"></div>
+<nav class="bn"><a href="#/" id="hb" onclick="goHome();return false"></a><a href="#/cart" id="cb" onclick="return gate(event,'/cart')"></a></nav>
 <main id="app"></main>
 <footer><b style="font-size:18px">MoHoN Shop</b><p id="ab"></p><div>Contact: <a href="tel:01725233759">01725233759</a></div><div>WhatsApp: <a href="https://wa.me/8801725233759">01725233759</a></div><div>Email: <a href="mailto:mashiurrahman.bus@gmail.com">mashiurrahman.bus@gmail.com</a></div></footer>
 <script>
@@ -425,12 +468,13 @@ function mergeC(u){const k=c=>c.slug+"|"+c.size+"|"+c.color,r=(u.user_metadata&&
  const ch=JSON.stringify(m)!=JSON.stringify(cart);cart=m;localStorage.c=JSON.stringify(cart);chrome();
  if(JSON.stringify(m)!=JSON.stringify(r))sb.auth.updateUser({data:{cart}});
  if(ch&&/^#\/(cart|profile)$/.test(location.hash))route()}
-function chrome(){$("lb").textContent=t("lang");$("cb").textContent="🛒 "+t("cart")+" ("+cart.length+")";$("ab").textContent=t("ab");$("ob").textContent=t("mo");$("hb").textContent="🏠 "+(lang=="bn"?"হোম":"Home");$("su").textContent=ME?t("pf"):t("su")}
+function chrome(){$("cb").textContent="🛒 "+t("cart")+" ("+cart.length+")";$("ab").textContent=t("ab");$("hb").textContent="🏠 "+(lang=="bn"?"হোম":"Home");hxLabels()}
 function setL(){lang=lang=="bn"?"en":"bn";localStorage.l=lang;chrome();route()}
 async function load(){const r=await sb.from("products").select("*").order("created_at",{ascending:false});P=r.data||[];await loadC()}
 let C=[];
 async function loadC(){const r=await sb.from("categories").select("*").order("created_at",{ascending:true});C=(!r.error&&r.data)?r.data:[...new Set(P.map(p=>p.category).filter(Boolean))].map(n=>({name:n,fb:1}))}
 async function route(){const h=location.hash.slice(1)||"/";window.scrollTo(0,0);clearInterval(window.tm);document.body.classList.toggle("adm",h.startsWith("/admin"));{const f=document.querySelector("footer");if(f)f.style.display=(h=="/"||h=="")?"":"none"}
+ if(h=="/help"){helpV();return}
  if(!P.length&&!h.startsWith("/admin"))await load();
  if(h=="/")home();else if(h.startsWith("/product/"))prod(decodeURIComponent(h.slice(9)));else if(h.startsWith("/p/")){const q=decodeURIComponent(h.slice(3)).toLowerCase(),p=P.find(x=>pCode(x)==q)||P.find(x=>String(x.id).replace(/-/g,"").toLowerCase().startsWith(q));p?prod(p.slug):($("app").innerHTML="404")}
  else if(h=="/cart")cartV();else if(h=="/orders")ordersV();else if(h=="/profile")profV();else if(h=="/checkout")checkout();else if(h=="/admin")admin();else if(h=="/admin/orders")aOrders();else if(h=="/admin/products")aProducts();else if(h.startsWith("/admin/product/"))aManage(decodeURIComponent(h.slice(15)));else if(h.startsWith("/section/"))secV(decodeURIComponent(h.slice(9)));else if(h.startsWith("/admin/order/"))aOrder(decodeURIComponent(h.slice(13)));else home()}
@@ -828,10 +872,45 @@ async function upl(el){const pv=$("pv");pv.textContent="আপলোড হচ�
  const b=await new Promise(r=>c.toBlob(r,"image/jpeg",.85)),n=Date.now()+"-"+Math.random().toString(36).slice(2,7)+".jpg",r=await sb.storage.from("products").upload(n,b,{contentType:"image/jpeg"});
  if(r.error){alert(r.error.message);continue}u.push(sb.storage.from("products").getPublicUrl(n).data.publicUrl)}catch(err){alert(err.message)}}
  $("im").value=u.join(",");pv.innerHTML=u.map(i=>`<img src="${e(i)}" style="width:70px;height:70px;object-fit:cover;border-radius:8px;margin:3px">`).join("")}
-sb.auth.onAuthStateChange((ev,x)=>{ME=x&&x.user&&isC(x.user)?x.user:null;$("su").textContent=ME?t("pf"):t("su");if(ME&&(ev=="INITIAL_SESSION"||ev=="SIGNED_IN")){const u=ME;setTimeout(()=>mergeC(u),0)}});
+sb.auth.onAuthStateChange((ev,x)=>{ME=x&&x.user&&isC(x.user)?x.user:null;hxLabels();if(ME&&(ev=="INITIAL_SESSION"||ev=="SIGNED_IN")){const u=ME;setTimeout(()=>mergeC(u),0)}});
 async function gate(ev,path){ev.preventDefault();const s=(await sb.auth.getSession()).data.session,ok=!!(s&&isC(s.user));
  if(!ok){mode="up";made=false}
  const to=ok?path:"/profile";if(location.hash=="#"+to)route();else location.hash=to;return false}
 function goHome(){if(location.hash==""||location.hash=="#/")route();else location.hash="#/"}
+/* ===== three-dot menu + help page ===== */
+const HX={ph:"01725233759",wa:"8801725233759",ml:"mashiurrahman.bus@gmail.com"};
+const HXI={home:'<path d="M3 9l9-7 9 7v11a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z"/><path d="M9 22V12h6v10"/>',
+user:'<path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"/><circle cx="12" cy="7" r="4"/>',
+box:'<path d="M21 16V8a2 2 0 0 0-1-1.73l-7-4a2 2 0 0 0-2 0l-7 4A2 2 0 0 0 3 8v8a2 2 0 0 0 1 1.73l7 4a2 2 0 0 0 2 0l7-4A2 2 0 0 0 21 16z"/><path d="M3.27 6.96L12 12.01l8.73-5.05M12 22.08V12"/>',
+cart:'<circle cx="9" cy="21" r="1"/><circle cx="20" cy="21" r="1"/><path d="M1 1h4l2.68 13.39a2 2 0 0 0 2 1.61h9.72a2 2 0 0 0 2-1.61L23 6H6"/>',
+globe:'<circle cx="12" cy="12" r="10"/><path d="M2 12h20"/><path d="M12 2a15.3 15.3 0 0 1 4 10 15.3 15.3 0 0 1-4 10 15.3 15.3 0 0 1-4-10 15.3 15.3 0 0 1 4-10z"/>',
+help:'<path d="M3 18v-6a9 9 0 0 1 18 0v6"/><path d="M21 19a2 2 0 0 1-2 2h-1a2 2 0 0 1-2-2v-3a2 2 0 0 1 2-2h3zM3 19a2 2 0 0 0 2 2h1a2 2 0 0 0 2-2v-3a2 2 0 0 0-2-2H3z"/>',
+wa:'<path d="M21 11.5a8.38 8.38 0 0 1-.9 3.8 8.5 8.5 0 0 1-7.6 4.7 8.38 8.38 0 0 1-3.8-.9L3 21l1.9-5.7a8.38 8.38 0 0 1-.9-3.8 8.5 8.5 0 0 1 4.7-7.6 8.38 8.38 0 0 1 3.8-.9h.5a8.48 8.48 0 0 1 8 8v.5z"/>',
+ph:'<path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07 19.5 19.5 0 0 1-6-6 19.79 19.79 0 0 1-3.07-8.67A2 2 0 0 1 4.11 2h3a2 2 0 0 1 2 1.72 12.84 12.84 0 0 0 .7 2.81 2 2 0 0 1-.45 2.11L8.09 9.91a16 16 0 0 0 6 6l1.27-1.27a2 2 0 0 1 2.11-.45 12.84 12.84 0 0 0 2.81.7A2 2 0 0 1 22 16.92z"/>',
+ml:'<path d="M4 4h16a2 2 0 0 1 2 2v12a2 2 0 0 1-2 2H4a2 2 0 0 1-2-2V6a2 2 0 0 1 2-2z"/><path d="M22 6l-10 7L2 6"/>',
+go:'<path d="M9 18l6-6-6-6"/>'};
+const hxSvg=p=>'<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">'+p+'</svg>';
+let hxOpen=false;
+function hxItems(){const it=(ic,lb,x,extra)=>`<${x.tag} class="hx-it${x.cls||""}" role="menuitem" ${x.attr}><span class="hx-ic">${hxSvg(HXI[ic])}</span>${lb}${extra||""}</${x.tag}>`;
+ return it("home",L("হোম","Home"),{tag:"a",attr:`href="#/" onclick="hxClose();goHome();return false"`})
+ +it("user",ME?L("মাই অ্যাকাউন্ট","My Account"):L("সাইন আপ / লগইন","Sign Up / Login"),{tag:"a",cls:ME?"":" pri",attr:`href="#/profile" onclick="hxClose();return gate(event,'/profile')"`})
+ +it("box",L("আমার অর্ডার","My Orders"),{tag:"a",attr:`href="#/orders" onclick="hxClose();return gate(event,'/orders')"`})
+ +it("cart",L("কার্ট","Cart"),{tag:"a",attr:`href="#/cart" onclick="hxClose();return gate(event,'/cart')"`},cart.length?`<span class="hx-bd">${cart.length}</span>`:"")
+ +'<div class="hx-sp" role="separator"></div>'
+ +it("globe",L("ভাষা","Language"),{tag:"button",attr:`type="button" onclick="hxClose();setL()"`},`<span class="hx-pill">${t("lang")}</span>`)
+ +it("help",L("হেল্প সেন্টার","Help Center"),{tag:"a",attr:`href="#/help" onclick="hxClose()"`})}
+function hxShow(){const b=$("mnb"),d=$("hxd"),r=b.getBoundingClientRect();d.innerHTML=hxItems();d.style.top=(r.bottom+8)+"px";d.style.left=Math.max(8,r.left)+"px";$("hxo").classList.add("on");d.classList.add("on");b.setAttribute("aria-expanded","true");hxOpen=true;const f=d.querySelector(".hx-it");if(f)f.focus({preventScroll:true})}
+function hxClose(){if(!hxOpen)return;hxOpen=false;$("hxo").classList.remove("on");$("hxd").classList.remove("on");$("mnb").setAttribute("aria-expanded","false")}
+function hxToggle(ev){if(ev)ev.stopPropagation();hxOpen?hxClose():hxShow()}
+function hxLabels(){const s=$("su"),m=$("mnb"),a=ME?L("প্রোফাইল","Profile"):L("সাইন আপ / লগইন","Sign Up / Login"),b=L("মেনু","Menu");if(s){s.setAttribute("aria-label",a);s.title=a}if(m){m.setAttribute("aria-label",b);m.title=b}}
+document.addEventListener("keydown",ev=>{if(!hxOpen)return;const k=ev.key;if(k=="Escape"){hxClose();$("mnb").focus()}else if(k=="Tab")hxClose();else if(k=="ArrowDown"||k=="ArrowUp"){ev.preventDefault();const it=[...$("hxd").querySelectorAll(".hx-it")],n=it.length,i=it.indexOf(document.activeElement);it[i<0?(k=="ArrowDown"?0:n-1):(i+(k=="ArrowDown"?1:n-1))%n].focus()}});
+window.addEventListener("hashchange",hxClose);window.addEventListener("resize",hxClose);
+$("hxo").addEventListener("touchmove",ev=>ev.preventDefault(),{passive:false});
+function helpV(){const m=encodeURIComponent(L("হ্যালো, MoHoN Shop-এ আমার একটু সাহায্য দরকার।","Hello, I need some help with MoHoN Shop.")),
+ row=(c,ic,ti,va,hr,ex)=>`<a class="hlp-c ${c}" href="${hr}"${ex||""}><span class="hlp-i">${hxSvg(HXI[ic])}</span><span class="hlp-t"><b>${ti}</b><span>${va}</span></span><span class="hlp-go">${hxSvg(HXI.go)}</span></a>`;
+ $("app").innerHTML=`<div class="hlp"><button class="bkb" onclick="goHome()">← ${L("হোম","Home")}</button><div class="hlp-hd"><h2>${L("হেল্প সেন্টার","Help Center")}</h2><p>${L("অর্ডার, পেমেন্ট বা ডেলিভারি নিয়ে কোনো প্রশ্ন থাকলে নিচের যেকোনো মাধ্যমে সরাসরি যোগাযোগ করুন।","Have a question about an order, payment or delivery? Reach us directly using any option below.")}</p></div>`
+ +row("wa","wa",L("WhatsApp-এ মেসেজ করুন","Message on WhatsApp"),HX.ph,"https://wa.me/"+HX.wa+"?text="+m,' target="_blank" rel="noopener"')
+ +row("ph","ph",L("ফোনে কল করুন","Call us"),HX.ph,"tel:"+HX.ph)
+ +row("ml","ml",L("ইমেইল পাঠান","Send an email"),HX.ml,"mailto:"+HX.ml)+`</div>`}
 window.onhashchange=route;chrome();route();
 </script></body></html>
