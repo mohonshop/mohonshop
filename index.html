@@ -99,6 +99,22 @@ input:focus,select:focus,textarea:focus{outline:0;border-color:var(--b);box-shad
 footer{background:linear-gradient(160deg,#081633,#0f2557)!important;color:#c8d2ee!important;padding:30px 20px 34px!important;margin-top:28px;border-top:3px solid var(--gold);line-height:1.9}
 footer b{color:#fff;letter-spacing:.5px}footer a{color:#f3dfb4;text-decoration:none;border-bottom:1px dotted #f3dfb480}
 ::selection{background:#f6d38a}
+
+/* ===== PRODUCT CARD PREMIUM ===== */
+.card{position:relative;border:1px solid #e9edf6;border-radius:20px;background:#fff;box-shadow:0 2px 6px rgba(8,22,51,.05),0 10px 26px rgba(15,37,87,.09);display:flex;flex-direction:column;overflow:hidden}
+.card:after{content:"";position:absolute;inset:0;border-radius:20px;pointer-events:none;box-shadow:inset 0 0 0 1px rgba(255,255,255,.7)}
+.card .im{aspect-ratio:1/1.08;background:linear-gradient(180deg,#f4f6fb,#e9edf6);overflow:hidden}
+.card .im img{transition:transform .5s ease}
+@media(hover:hover){.card:hover .im img{transform:scale(1.07)}.card:hover{border-color:#e6cf9c}}
+.card .im:after{content:"";position:absolute;left:0;right:0;bottom:0;height:38%;background:linear-gradient(180deg,transparent,rgba(8,22,51,.14));pointer-events:none}
+.dsc{position:absolute;top:10px;left:10px;z-index:2;background:linear-gradient(135deg,#ef4444,#b91c1c);color:#fff;font-size:11.5px;font-weight:800;padding:4px 10px;border-radius:20px;letter-spacing:.3px;box-shadow:0 3px 10px rgba(185,28,28,.4)}
+.card div.t{padding:12px 13px 14px;display:flex;flex-direction:column;gap:4px;border-top:2px solid transparent;background:linear-gradient(180deg,#fff,#fbfcfe);flex:1}
+.ct{color:#b9822a;font-size:10.5px;font-weight:700;letter-spacing:1.1px;text-transform:uppercase}
+.card .nm{font-size:14.5px;font-weight:600;color:var(--bd);line-height:1.4;display:-webkit-box;-webkit-line-clamp:2;-webkit-box-orient:vertical;overflow:hidden;min-height:2.8em}
+.card .pr{display:flex;align-items:baseline;flex-wrap:wrap;gap:4px 8px;margin-top:auto;padding-top:8px;border-top:1px dashed #e3e8f3}
+.card .pr b{font-size:18px;font-weight:800;color:#047857;letter-spacing:-.2px}
+.card .pr .old{font-size:12.5px;color:#9aa3b8}
+.card .out{background:rgba(8,22,51,.82);backdrop-filter:blur(2px);z-index:2}
 </style></head><body>
 <header><a href="#/"><img src="logo.png" alt="" onerror="this.style.display='none'"></a><b>MoHoN Shop</b><button type="button" class="lg" id="lb" onclick="setL()"></button><a href="#/profile" class="su" id="su" onclick="return gate(event,'/profile')"></a></header>
 <nav class="bn"><a href="#/orders" id="ob" onclick="return gate(event,'/orders')"></a><a href="#/cart" id="cb" onclick="return gate(event,'/cart')"></a></nav>
@@ -130,7 +146,7 @@ function cats(){const cs=[...new Set(P.map(p=>p.category).filter(Boolean))];
  [""].concat(cs).map(c=>`<span class="chip ${F.cat==c?"on":""}" onclick="F.cat=this.dataset.c;cats();list()" data-c="${e(c)}">${c?e(c):t("all")}</span>`).join("")}
 function list(){let a=P.filter(p=>(!F.g||p.gender==F.g)&&(!F.cat||p.category==F.cat)&&(nm(p)+(p.name_en||"")+p.name_bn).toLowerCase().includes(F.q.toLowerCase()));
  if(F.s=="lo")a.sort((x,y)=>x.price-y.price);if(F.s=="hi")a.sort((x,y)=>y.price-x.price);
- $("gr").innerHTML=a.map(p=>`<a class="card" href="#/product/${encodeURIComponent(p.slug)}"><div class="im">${p.images[0]?`<img src="${e(p.images[0])}" alt="">`:e(nm(p))}${p.in_stock?"":`<div class="out">${t("out")}</div>`}</div><div class="t"><div>${e(nm(p))}</div><b>${tk(p.price)}</b> ${p.old_price?`<span class="old">${tk(p.old_price)}</span>`:""}</div></a>`).join("")}
+ $("gr").innerHTML=a.map(p=>`<a class="card" href="#/product/${encodeURIComponent(p.slug)}"><div class="im">${p.images[0]?`<img src="${e(p.images[0])}" alt="">`:e(nm(p))}${p.old_price>p.price?`<span class="dsc">-${Math.round((p.old_price-p.price)/p.old_price*100)}%</span>`:""}${p.in_stock?"":`<div class="out">${t("out")}</div>`}</div><div class="t">${p.category?`<small class="ct">${e(p.category)}</small>`:""}<div class="nm">${e(nm(p))}</div><div class="pr"><b>${tk(p.price)}</b>${p.old_price>p.price?`<span class="old">${tk(p.old_price)}</span>`:""}</div></div></a>`).join("")}
 async function prod(slug){const p=P.find(x=>x.slug==slug);if(!p){$("app").innerHTML="404";return}
  sel={size:p.sizes[0],color:p.colors[0],qty:1,p};
   const ch=(k,a)=>a.length?`<div class="lbl">${t(k=="size"?"size":"color")}:</div>`+a.map(v=>`<span class="chip ${sel[k]==v?"on":""}" onclick="pick('${k}',this)">${e(v)}</span>`).join(""):"";
